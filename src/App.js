@@ -1,5 +1,6 @@
-import { useState } from 'react';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 /*
   * Componente tem como pré-requisito:
@@ -12,50 +13,10 @@ import './App.css';
   *              Os estados são privados e mutáveis após a primeira renderização.
 */
 
-
-/*
-  * Atividades a mais:
-  * - Adicionar dropdown de gênero (masc, fem, outro)
-  * - A palavra "portadora" pode ser modificada a partir do gênero
-  * - Adicionar uma data no documento
-  * - Validar campos (não aceitar texto no cpf e não aceitar campo vazio)
-*/
-
 function App() {
-  let nomeTemp = '';
-
-  const [nome, setNome] = useState('');
-
-  const handleClick = () => {
-    setNome(nomeTemp);
-  }
-
-  const handleChange = (evento) => {
-    nomeTemp = evento.target.value;
-  }
-
   return (
     <div className="App">
-      <div>
-        <div>
-          <label htmlFor="nome">Nome: </label>
-          <input
-            type="text"
-            name="nome"
-            placeholder="Insira seu nome"
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="cpf">CPF: </label>
-          <input type="text" name="cpf" placeholder="Insira seu cpf" />
-        </div>
-        <button onClick={handleClick}>
-          Gerar documento
-        </button>
-      </div>
-
-      <p>Eu, {nome}, portadora do CPF _______, aceito os termos deste contrato.</p>
+      <FontAwesomeIcon icon={faChevronCircleLeft} />
     </div>
   );
 }
