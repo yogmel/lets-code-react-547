@@ -1,0 +1,13 @@
+.card {
+  border: 1px solid black;
+  margin: 20px;
+  padding: 30px;
+}
+
+.card.ativo {
+  background-color: #9bc4cb;
+}
+
+.card > h3 {
+  margin: 0;
+}

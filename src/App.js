@@ -1,6 +1,5 @@
 import './App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import PrevisaoDoTempoContainer from './routes/exercicioQuatro';
 
 /*
   * Componente tem como pré-requisito:
@@ -16,7 +15,7 @@ import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
 function App() {
   return (
     <div className="App">
-      <FontAwesomeIcon icon={faChevronCircleLeft} />
+      <PrevisaoDoTempoContainer />
     </div>
   );
 }
