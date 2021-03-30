@@ -1,5 +1,5 @@
 import './App.css';
-import PrevisaoDoTempoContainer from './routes/exercicioQuatro';
+import ChatContainer from './routes/exercicioCinco';
 
 /*
   * Componente tem como pré-requisito:
@@ -15,7 +15,7 @@ import PrevisaoDoTempoContainer from './routes/exercicioQuatro';
 function App() {
   return (
     <div className="App">
-      <PrevisaoDoTempoContainer />
+      <ChatContainer />
     </div>
   );
 }

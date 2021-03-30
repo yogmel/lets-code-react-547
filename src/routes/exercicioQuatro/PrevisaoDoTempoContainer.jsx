@@ -6,7 +6,7 @@ const PrevisaoDoTempoContainer = () => {
 	return (
     <div>
       {dadosPrevisao.map(
-        (previsao) => <PrevisaoCard dadoPrevisao={previsao} />
+        (previsao, index) => <PrevisaoCard key={index} dadoPrevisao={previsao} />
       )}
     </div>
   );
