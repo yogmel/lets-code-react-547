@@ -1,11 +1,9 @@
 import { useState } from "react";
+import MensagensWrapper from "./MensagensWrapper";
+import InputWrapper from "./InputWrapper";
 
 const ChatContainer = () => {
-  const [mensagens, setMensagens] = useState([
-    "mensagem1",
-    "mensagem2",
-    "mensagem3",
-  ]);
+  const [mensagens, setMensagens] = useState([]);
   const [mensagemAtual, setMensagemAtual] = useState("");
 
   const handleChange = (evento) => {
@@ -19,21 +17,12 @@ const ChatContainer = () => {
 
   return (
     <div>
-      <div>
-        <input
-          type="text"
-          placeholder="Digite sua mensagem"
-          value={mensagemAtual}
-          onChange={handleChange}
-        />
-        <button onClick={handleClick}>Adicionar mensagem</button>
-      </div>
-
-      <div className="caixa-mensagens">
-        {mensagens.map((mensagem, index) => {
-          return <p key={index}>{mensagem}</p>;
-        })}
-      </div>
+      <InputWrapper
+        mensagemAtual={mensagemAtual}
+        onChange={handleChange}
+        onClick={handleClick}
+      />
+      <MensagensWrapper mensagens={mensagens} />
     </div>
   );
 };
