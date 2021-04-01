@@ -1,3 +1,5 @@
+import './MensagensWrapper.css';
+
 const MensagensWrapper = (props) => {
   return (
     <div className="caixa-mensagens">

@@ -37,7 +37,22 @@
   }
 }
 
-.caixa-mensagens {
-  border: 1px solid black;
-  margin-top: 15px;
+.tarefa__container {
+  border: 1px solid;
+  margin: 25px auto;
+  max-width: 300px;
+}
+
+.tarefa__descricao {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.tarefa {
+  color: #333;
+}
+
+.tarefa.check {
+  text-decoration: line-through;
 }
