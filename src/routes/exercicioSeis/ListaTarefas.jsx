@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import Tarefa from './Tarefa';
 
+/*
+  interface Tarefa {
+    id: number;
+    descricao: string;
+    check: boolean;
+  }
+*/
+
 const ListaTarefas = () => {
   const [id, setId] = useState(0);
   const [tarefas, setTarefas] = useState([]);
