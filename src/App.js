@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import PrevisaoCard from "./routes/exercicioQuatroClasse";
+import PrevisaoCard from "./routes/exercicioQuatro";
 
 /*
  * Componente tem como pré-requisito:
