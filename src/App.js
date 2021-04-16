@@ -1,6 +1,6 @@
 import "./App.css";
-import React from "react";
-import PrevisaoCard from "./routes/exercicioQuatro";
+import React, { useEffect, useState } from "react";
+import { gerarNumeroAleatorio } from "./utils";
 
 /*
  * Componente tem como pré-requisito:
@@ -15,44 +15,53 @@ import PrevisaoCard from "./routes/exercicioQuatro";
 
 // componentes funcionais ou stateLESS components
 function App() {
+  const [imageUrl, setImageUrl] = useState("");
+  const [gifs, setGifs] = useState([]);
+  const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  const limit = 20;
+
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      const api_key = process.env.REACT_APP_GIPHY_API_KEY;
+      const url = `https://api.giphy.com/v1/gifs/trending?api_key=${api_key}&limit=${limit}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          const index = gerarNumeroAleatorio(limit);
+          setImageUrl(data.data[index].images.original.url);
+          setGifs(data.data);
+          setIndex(index);
+          setLoading(false);
+        });
+    }, 2000);
+  }, []);
+
+  const atualizarGif = () => {
+    let indexAtual = gerarNumeroAleatorio(limit);
+
+    while (indexAtual === index) {
+      indexAtual = gerarNumeroAleatorio(limit);
+    }
+
+    const url = gifs[indexAtual].images.original.url;
+    setImageUrl(url);
+  };
+
   return (
     <div className="App">
-      <PrevisaoCard />
+      {loading && <p>Carregando...</p>}
+      {!loading && (
+        <>
+          <h2>Seu humor</h2>
+          <img src={imageUrl} alt="" />
+          <button onClick={atualizarGif}>Gerar novo humor</button>
+        </>
+      )}
     </div>
   );
 }
-
-// componentes classe com estado ou stateFUL components
-// class App extends React.Component {
-//   constructor(props) {
-//     super();
-
-//     this.state = {
-//       nome: "mell",
-//       contador: 0,
-//     };
-//     this.adicionaUm = this.adicionaUm.bind(this); // bind() atrela um contexto (que é passado como parâmetro) a uma função
-//   }
-
-//   adicionaUm() {
-//     this.setState((estadoAnterior) => {
-//       return {
-//         contador: estadoAnterior.contador + 1,
-//       };
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div className="App">
-//         <button onClick={this.adicionaUm}>Adicionar 1</button>
-//         <p>contador: {this.state.contador}</p>
-//         <p>nome: {this.state.nome}</p>
-//         <p>props: {this.props.nome}</p>
-//         <ListaTarefas />
-//       </div>
-//     );
-//   }
-// }
 
 export default App;
