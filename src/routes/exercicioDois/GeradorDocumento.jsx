@@ -1,21 +1,23 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { useParams } from "react-router";
 
 /*
-  * Atividades a mais:
-  * - Adicionar dropdown de gênero (masc, fem, outro)
-  * - A palavra "portadora" pode ser modificada a partir do gênero
-  * - Adicionar uma data no documento
-  * - Validar campos (não aceitar texto no cpf e não aceitar campo vazio)
-*/
+ * Atividades a mais:
+ * - Adicionar dropdown de gênero (masc, fem, outro)
+ * - A palavra "portadora" pode ser modificada a partir do gênero
+ * - Adicionar uma data no documento
+ * - Validar campos (não aceitar texto no cpf e não aceitar campo vazio)
+ */
 
 const GeradorDocumento = () => {
-	const [pessoaAtual, setPessoaAtual] = useState({
-    nome: '',
-    cpf: ''
+  const { nome, cpf } = useParams();
+  const [pessoaAtual, setPessoaAtual] = useState({
+    nome: nome || "",
+    cpf: cpf || "",
   });
   const [pessoa, setPessoa] = useState({
-    nome: '',
-    cpf: ''
+    nome: nome || "",
+    cpf: cpf || "",
   });
 
   const handleClick = () => setPessoa(pessoaAtual);
@@ -24,9 +26,9 @@ const GeradorDocumento = () => {
     const propriedade = evento.target.name;
     setPessoaAtual({
       ...pessoaAtual,
-      [propriedade]: evento.target.value
+      [propriedade]: evento.target.value,
     });
-  }
+  };
 
   return (
     <>
