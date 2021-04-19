@@ -1,6 +1,13 @@
+import { Route, Switch } from "react-router";
+import { BrowserRouter, Link } from "react-router-dom";
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import { gerarNumeroAleatorio } from "./utils";
+import ChatContainer from "./routes/exercicioCinco";
+import GeradorDocumento from "./routes/exercicioDois";
+import PrevisaoDoTempoContainer from "./routes/exercicioQuatro";
+import ListaTarefas from "./routes/exercicioSeis";
+import Giphy from "./routes/exercicioSete";
+import NumAleatorio from "./routes/exercicioTres";
+import CitacaoContainer from "./routes/exercicioUm";
 
 /*
  * Componente tem como pré-requisito:
@@ -15,53 +22,30 @@ import { gerarNumeroAleatorio } from "./utils";
 
 // componentes funcionais ou stateLESS components
 function App() {
-  const [imageUrl, setImageUrl] = useState("");
-  const [gifs, setGifs] = useState([]);
-  const [index, setIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  const limit = 20;
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      const api_key = process.env.REACT_APP_GIPHY_API_KEY;
-      const url = `https://api.giphy.com/v1/gifs/trending?api_key=${api_key}&limit=${limit}`;
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          const index = gerarNumeroAleatorio(limit);
-          setImageUrl(data.data[index].images.original.url);
-          setGifs(data.data);
-          setIndex(index);
-          setLoading(false);
-        });
-    }, 2000);
-  }, []);
-
-  const atualizarGif = () => {
-    let indexAtual = gerarNumeroAleatorio(limit);
-
-    while (indexAtual === index) {
-      indexAtual = gerarNumeroAleatorio(limit);
-    }
-
-    const url = gifs[indexAtual].images.original.url;
-    setImageUrl(url);
-  };
-
   return (
-    <div className="App">
-      {loading && <p>Carregando...</p>}
-      {!loading && (
-        <>
-          <h2>Seu humor</h2>
-          <img src={imageUrl} alt="" />
-          <button onClick={atualizarGif}>Gerar novo humor</button>
-        </>
-      )}
-    </div>
-  );
+  <div>
+  <BrowserRouter>
+    <p>Nossa galera de exercicios</p>
+    <Link to='/home'>Home</Link> | 
+    <Link to='/exercicioUm'>Exercicio Um</Link> | 
+    <Link to='/exercicioDois/Ricardo/12345'>Exercicio Dois</Link> |
+    <Link to='/exercicioTres'>Exercicio Três</Link> |
+    <Link to='/exercicioQuatro'>Exercicio Quatro</Link> |
+    <Link to='/exercicioCinco'>Exercicio Cinco</Link> |
+    <Link to='/exercicioSeis'>Exercicio Seis</Link> |
+    <Link to='/exercicioSete'>Exercicio Sete</Link> |
+    <Switch>
+      <Route path='/exercicioUm'><CitacaoContainer/></Route>
+      <Route path='/exercicioDois/:nome/:cpf'><GeradorDocumento/></Route>
+      <Route path='/exercicioTres'><NumAleatorio/></Route>
+      <Route path='/exercicioQuatro'><PrevisaoDoTempoContainer/></Route>
+      <Route path='/exercicioCinco'><ChatContainer/></Route>
+      <Route path='/exercicioSeis'><ListaTarefas/></Route>
+      <Route path='/exercicioSete'><Giphy/></Route>
+      <Route exact={true} path='/'>Home dos exercicios!!</Route>
+    </Switch>
+  </BrowserRouter>
+  </div>);
 }
 
 export default App;
