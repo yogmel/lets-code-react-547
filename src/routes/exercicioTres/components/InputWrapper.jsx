@@ -1,5 +1,5 @@
 const InputWrapper = (props) => {
-  const { handleChange, handleClick } = props;
+  const { handleChange, handleClick, disabled } = props;
 
   return (
     <div>
@@ -11,6 +11,7 @@ const InputWrapper = (props) => {
           defaultValue={0}
           onChange={handleChange}
           placeholder="Mínimo"
+          disabled={disabled}
         />
       </div>
       <div>
@@ -21,9 +22,12 @@ const InputWrapper = (props) => {
           defaultValue={100}
           onChange={handleChange}
           placeholder="Máximo"
+          disabled={disabled}
         />
       </div>
-      <button onClick={handleClick}>Gerar número</button>
+      <button onClick={handleClick}>
+        {disabled ? "Gerar novamente" : "Gerar número"}
+      </button>
     </div>
   );
 };

@@ -1,9 +1,9 @@
 import { useState } from "react";
 
 const UserInputWrapper = (props) => {
-  const [num, setNum] = useState();
+  const [num, setNum] = useState(0);
 
-  const { setUserNumber, checarNumeros } = props;
+  const { setUserNumber, checarNumeros, disabled } = props;
 
   const handleUserNumberChange = (evento) => {
     const valor = parseInt(evento.target.value);
@@ -11,7 +11,7 @@ const UserInputWrapper = (props) => {
   };
 
   const checarNumHandle = () => {
-    console.log("num", num);
+    setUserNumber(num);
     checarNumeros(num);
   };
 
@@ -23,8 +23,11 @@ const UserInputWrapper = (props) => {
         defaultValue={0}
         onChange={handleUserNumberChange}
         placeholder="Sua tentativa aqui"
+        disabled={disabled}
       />
-      <button onClick={checarNumHandle}>Tentar número</button>
+      <button onClick={checarNumHandle} disabled={disabled}>
+        Tentar número
+      </button>
     </div>
   );
 };

@@ -26,7 +26,6 @@ const NumAleatorio = () => {
 
     if (max > min) {
       const num = Math.floor(Math.random() * (max - min)) + 1 + min;
-      console.log("num", num);
       setNumAleatorio(num);
       setMsgErro("");
     } else if (max < min) {
@@ -37,12 +36,18 @@ const NumAleatorio = () => {
   };
 
   const handleClick = () => {
-    gerarNumAleatorio();
+    if (!numAleatorio) {
+      gerarNumAleatorio();
+      return;
+    }
+    setNumAleatorio(null);
   };
 
   const checarNumeros = (num) => {
-    console.log("num checar", num);
-    console.log("numAleatorio checar", numAleatorio);
+    if (num === undefined) {
+      setMsgErro("Número indefinido. Gere novamente");
+      return;
+    }
     if (num > numAleatorio) {
       setFeedback("Seu número é maior que o sorteado");
     } else if (num < numAleatorio) {
@@ -55,12 +60,19 @@ const NumAleatorio = () => {
   return (
     <>
       <h2>Sorteie um número</h2>
-      <InputWrapper handleClick={handleClick} handleChange={handleChange} />
+      <InputWrapper
+        handleClick={handleClick}
+        handleChange={handleChange}
+        disabled={!!numAleatorio}
+      />
 
-      {numAleatorio && (
+      {msgErro && <p>{msgErro}</p>}
+
+      {!msgErro && numAleatorio && (
         <UserInputWrapper
           setUserNumber={setUserNumber}
           checarNumeros={checarNumeros}
+          disabled={userNumber === numAleatorio}
         />
       )}
 
