@@ -8,6 +8,7 @@ import ListaTarefas from "./routes/exercicioSeis";
 import Giphy from "./routes/exercicioSete";
 import NumAleatorio from "./routes/exercicioTres";
 import CitacaoContainer from "./routes/exercicioUm";
+import Navbar from "./Navbar";
 
 /*
  * Componente tem como pré-requisito:
