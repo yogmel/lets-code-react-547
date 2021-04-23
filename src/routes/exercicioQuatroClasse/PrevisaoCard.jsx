@@ -9,9 +9,25 @@ class PrevisaoCard extends React.Component {
     this.props = props;
     this.state = {
       destaque: false,
+      airPollution: 0,
     };
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    const {
+      coordenadas: { lat, lon },
+    } = this.props.dadoPrevisao;
+    const apiKey = "a8868b8ed509c59de081619871a3a53e";
+
+    fetch(
+      `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState(() => ({ airPollution: data.list[0].main.aqi }));
+      });
   }
 
   handleClick() {
@@ -29,6 +45,7 @@ class PrevisaoCard extends React.Component {
 
     return (
       <>
+        {this.state.airPollution > 0 && <p>Air polluted</p>}
         <div className={`card ${destaque === true ? "ativo" : ""}`}>
           <h3>{nome}</h3>
           <p>{descricao}</p>

@@ -7,6 +7,7 @@ const Navbar = () => {
       |<Link to="/exercicioDois/Ricardo/12345">Exercicio Dois</Link> |
       <Link to="/exercicioTres">Exercicio Três</Link> |
       <Link to="/exercicioQuatro">Exercicio Quatro</Link> |
+      <Link to="/exercicioQuatroClasse">Exercicio Quatro Classe</Link> |
       <Link to="/exercicioCinco">Exercicio Cinco</Link> |
       <Link to="/exercicioSeis">Exercicio Seis</Link> |
       <Link to="/exercicioSete">Exercicio Sete</Link> |

@@ -1,1 +1,1 @@
-export { default } from './PrevisaoDoTempoContainer';
+export * from "./PrevisaoDoTempoContainer";

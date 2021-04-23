@@ -1,9 +1,10 @@
 import { Route, Switch } from "react-router";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import ChatContainer from "./routes/exercicioCinco";
 import GeradorDocumento from "./routes/exercicioDois";
 import PrevisaoDoTempoContainer from "./routes/exercicioQuatro";
+import { PrevisaoDoTempoContainer as PrevisaoClasse } from "./routes/exercicioQuatroClasse";
 import ListaTarefas from "./routes/exercicioSeis";
 import Giphy from "./routes/exercicioSete";
 import NumAleatorio from "./routes/exercicioTres";
@@ -40,6 +41,9 @@ function App() {
           </Route>
           <Route path="/exercicioQuatro">
             <PrevisaoDoTempoContainer />
+          </Route>
+          <Route path="/exercicioQuatroClasse">
+            <PrevisaoClasse />
           </Route>
           <Route path="/exercicioCinco">
             <ChatContainer />
