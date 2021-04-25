@@ -1,12 +1,18 @@
-import { useState } from 'react';
+import { useState } from "react";
+import "./NumAleatorio.css";
+import { useParams } from "react-router-dom";
 
 const NumAleatorio = () => {
-	const [intervaloNum, setIntervaloNum] = useState({
-    min: 0,
-    max: 100
+  const params = useParams();
+
+  const [intervaloNum, setIntervaloNum] = useState({
+    min: params.min || 0,
+    max: params.max || 100,
   });
-  const [numAleatorio, setNumAleatorio] = useState(0);
-  const [msgErro, setMsgErro] = useState('');
+  const [numAleatorio, setNumAleatorio] = useState(null);
+  const [numTentativa, setNumTentativa] = useState(null);
+  const [msgErro, setMsgErro] = useState("");
+  const [feedback, setFeedback] = useState("");
 
   const handleChange = (evento) => {
     const valor = parseInt(evento.target.value);
@@ -14,9 +20,9 @@ const NumAleatorio = () => {
 
     setIntervaloNum({
       ...intervaloNum,
-      [propriedade]: valor
+      [propriedade]: valor,
     });
-  }
+  };
 
   const gerarNumAleatorio = () => {
     const { min, max } = intervaloNum;
@@ -24,20 +30,39 @@ const NumAleatorio = () => {
     if (max > min) {
       const num = Math.floor(Math.random() * (max - min)) + 1 + min;
       setNumAleatorio(num);
-      setMsgErro('');
+      setMsgErro("");
     } else if (max < min) {
-      setMsgErro('Número máximo não pode ser menor que o mínimo');
+      setMsgErro("Número máximo não pode ser menor que o mínimo");
     } else {
-      setMsgErro('Números iguais, geração de número aleatório sem sentido');
+      setMsgErro("Números iguais, geração de número aleatório sem sentido");
     }
-  }
+  };
 
   const handleClick = () => {
     gerarNumAleatorio();
-  }
+  };
+
+  const setarTentativa = (evento) => {
+    setNumTentativa(evento.target.value);
+  };
+
+  const gerarFeedback = () => {
+    const feedback = setarFeedback();
+    setFeedback(feedback);
+  };
+
+  const setarFeedback = () => {
+    if (numAleatorio > numTentativa) {
+      return "Seu número é menor do que o sorteado";
+    } else if (numAleatorio < numTentativa) {
+      return "Seu número é maior do que o sorteado";
+    } else {
+      return "Parabéns! Você acertou! O número é " + numTentativa;
+    }
+  };
 
   return (
-    <>
+    <div className="num-container">
       <h2>Sorteie um número</h2>
       <div>
         <div>
@@ -45,7 +70,7 @@ const NumAleatorio = () => {
           <input
             type="number"
             name="min"
-            defaultValue={0}
+            value={intervaloNum.min}
             onChange={handleChange}
             placeholder="Mínimo"
           />
@@ -55,7 +80,7 @@ const NumAleatorio = () => {
           <input
             type="number"
             name="max"
-            defaultValue={100}
+            value={intervaloNum.max}
             onChange={handleChange}
             placeholder="Máximo"
           />
@@ -63,12 +88,21 @@ const NumAleatorio = () => {
         <button onClick={handleClick}>Gerar número</button>
       </div>
 
-      <div>
-        <h3>O número gerado é:</h3>
-        <p>{numAleatorio}</p>
-        <p>{msgErro}</p>
-      </div>
-    </>
+      <p>{msgErro}</p>
+
+      {numAleatorio && (
+        <div>
+          <input
+            type="number"
+            placeholder="Digite sua tentativa"
+            onChange={setarTentativa}
+          />
+          <button onClick={gerarFeedback}>Tentar número</button>
+        </div>
+      )}
+
+      {numTentativa && <p>{feedback}</p>}
+    </div>
   );
 };
 

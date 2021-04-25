@@ -1,13 +1,16 @@
 import { Route, Switch } from "react-router";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import "./App.css";
-import ChatContainer from "./routes/exercicioCinco";
-import GeradorDocumento from "./routes/exercicioDois";
-import PrevisaoDoTempoContainer from "./routes/exercicioQuatro";
-import ListaTarefas from "./routes/exercicioSeis";
-import Giphy from "./routes/exercicioSete";
-import NumAleatorio from "./routes/exercicioTres";
-import CitacaoContainer from "./routes/exercicioUm";
+import Navbar from "./Navbar";
+import {
+  ChatContainer,
+  GeradorDocumento,
+  PrevisaoDoTempoContainer,
+  ListaTarefas,
+  NumAleatorio,
+  Giphy,
+  CitacaoContainer,
+} from "./routes";
 
 /*
  * Componente tem como pré-requisito:

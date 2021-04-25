@@ -18,7 +18,7 @@ class PrevisaoDoTempoContainer extends React.Component {
       "aracariguama",
       "colatina",
       "nova petropolis",
-      "maranhao",
+      "wuhan",
     ];
     const apiKey = "a8868b8ed509c59de081619871a3a53e";
 
@@ -38,7 +38,7 @@ class PrevisaoDoTempoContainer extends React.Component {
   };
 
   formatarDadosPrevisao = (data) => {
-    const { name, weather, main } = data;
+    const { name, weather, main, coord } = data;
 
     return {
       nome: name,
@@ -48,6 +48,7 @@ class PrevisaoDoTempoContainer extends React.Component {
         min: main.temp_min,
         max: main.temp_max,
       },
+      coordenadas: coord,
     };
   };
 
